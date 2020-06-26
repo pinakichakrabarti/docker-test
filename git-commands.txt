@@ -1,0 +1,35 @@
+git init : create local repository
+git add <file-name> : move a file to staging area
+git commit -m "<message>": submit a file
+
+#create a branch
+git branch <new-branch-name> 
+#delete a branch
+git branch -d <branch-name>
+#move to a branch
+git checkout <branchname>
+
+TBD:
+1. How to do a diff between brnaches
+2. How to create a brnahc form a specific change
+3. how to see diff in a changeset
+4. how to pull in a specific changeset
+5. How to pull in a change in a file done in a specific chanegset
+6. How to merge a file between branches
+7. how to merge a directory between merges
+8. how to rollback a file to its previous changeset
+9. how to rollback a page commit
+
+
+
+
+#how to link to a new reposiory
+git remote add origin <url>
+git push -u origin master #master is the remote branch
+
+
+#pull changes from remote repo
+git fetch
+git pull
+git merge
+git push
