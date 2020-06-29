@@ -1,0 +1,68 @@
+#setup:
+sudo usermod -aG docker <username> #avoid sudo every time
+#docker architecture: what runs and how to check
+
+
+docker pull ubuntu
+docker run ubuntu
+docker stop ubuntu
+docker rm <name from ps output>
+docker rmi ubuntu
+docker run -it ubuntu bash "or" docker run -it ubuntu sleep 60
+docker run -d ubuntu sleep 60 #run in daemon mode
+docker exec <container-id> <command> #run a command in a running container 
+
+#TBD How to set paths for docket repositiory
+
+docker ps 
+docker ps -a
+docker images
+#check details of a container
+docker inspect <container-name/id>
+#docker logs as came in stdout
+docker logs <container-name/id>
+#run a docker with ENViornment variable
+docker run -e <variable>=<value> <image>
+
+docker run -it ubuntu #-i:interactive -t:terminal
+docker attach <container name>
+
+#TBD: how to control user and groups
+
+
+#Port renumbering
+docker run -p 9000:5000 <image> # docker run -p <new-port>:<old-port> <image>
+#Volume Mount
+docker run -v <host-path like /var/>:<path-inside-docker like /var/mydb> <image>
+
+#Layers in a image
+docker history <image>
+#build an image
+docker build Dockerfile -t <image name like pinaki/myapp>
+
+#docker run in details
+
+docker run <image> arg... #like docker run -it ubuntu sleep 60
+#dockerfile may contain the CMD instruction like
+# CMD ["sleep", "10"] or CMD sleep 10, BUT NOT CMD ["sleep 10"]
+#another way is ENTRYPOINT like ENTRYPOINT ["sleep"] and then docker run -it <image> 10 works!!
+#CMD parameters gets replaced by command line arguments, for ENTRYPOINT the command line gets appended
+# ENTRYPOINT followed by CMD can be seen as way to pass default args
+#for example 
+# ENTRYPOINT ["sleep"]
+# CMD ["10"]
+#running this container without any arg will have initial command as sleep 10
+#to overwrite the ENTRYPOINT use following
+docker run --entry-point sleep2 <image> 10
+
+#docker networking
+#Docker by default creates three networks, bridge(default)(172.17.0.1/24), none and Host
+#these are three bridges.
+#the command to get attached to a bridge is 
+docker run <image> --network=[bridge/none/host/<customer created, see below>
+#How to create a network
+docker network create --driver bridge --subnet A.B.C.D/Mask <name of the network>
+#how to list all networks
+docker network ls
+#Docker runs a DHCP server at 127.0.0.11
+
