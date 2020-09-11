@@ -1,0 +1,31 @@
+libvirt Networking Handbook : https://jamielinux.com/docs/libvirt-networking-handbook/
+KVM Ubunt document: https://help.ubuntu.com/community/KVM/Networking
+useful like: https://www.cyberciti.biz/faq/find-ip-address-of-linux-kvm-guest-virtual-machine/
+virsh cheatsheet: https://computingforgeeks.com/virsh-commands-cheatsheet/#:~:text=Virsh%20create%20a%20vm,from%20CentOS%207%20ISO%20Image
+https://linuxconfig.org/how-to-create-and-manage-kvm-virtual-machines-from-cli
+
+what : virsh console <id> didnt work
+solution: login to the guest and give following commands
+$ sudo systemctl enable serial-getty@ttyS0.service
+$ sudo systemctl start serial-getty@ttyS0.service
+
+What: how to know IP address of VMs
+pinaki@pinaki-ks-linux:~$ virsh domifaddr pinaki-slave-vm1
+ Name       MAC address          Protocol     Address
+-------------------------------------------------------------------------------
+ vnet1      52:54:00:80:f4:73    ipv4         192.168.122.190/24
+or
+pinaki@pinaki-ks-linux:~$ virsh net-list
+ Name                 State      Autostart     Persistent
+----------------------------------------------------------
+ default              active     yes           yes
+ kubenet              active     yes           yes
+
+
+pinaki@pinaki-ks-linux:~$ virsh net-dhcp-leases default
+ Expiry Time          MAC address        Protocol  IP address                Hostname        Client ID or DUID
+-------------------------------------------------------------------------------------------------------------------
+ 2020-06-30 16:14:39  52:54:00:17:26:67  ipv4      192.168.122.59/24         pinaki-slave-vm2 -
+ 2020-06-30 16:14:36  52:54:00:80:f4:73  ipv4      192.168.122.190/24        pinaki-slave-vm1 -
+ 2020-06-30 15:58:54  52:54:00:af:80:7d  ipv4      192.168.122.194/24        pinaki-vm-master1 -
+                                                                                                                                                                   
