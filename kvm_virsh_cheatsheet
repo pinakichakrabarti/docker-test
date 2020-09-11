@@ -2,6 +2,7 @@ libvirt Networking Handbook : https://jamielinux.com/docs/libvirt-networking-han
 KVM Ubunt document: https://help.ubuntu.com/community/KVM/Networking
 useful like: https://www.cyberciti.biz/faq/find-ip-address-of-linux-kvm-guest-virtual-machine/
 virsh cheatsheet: https://computingforgeeks.com/virsh-commands-cheatsheet/#:~:text=Virsh%20create%20a%20vm,from%20CentOS%207%20ISO%20Image
+https://www.golinuxcloud.com/virt-install-examples-kvm-virt-commands-linux/#:~:text=virt%2Dinstall%20%2D%2Ddisk%20(path%2C%20size%2C%20format),-In%20all%20the&text=centos8%2D2.qcow2-,%5Broot%40rhel%2D8%20~%5D%23%20virt%2Dinstall%20%2D%2Dname,%2Dv%20Starting%20install...
 https://linuxconfig.org/how-to-create-and-manage-kvm-virtual-machines-from-cli
 
 what : virsh console <id> didnt work
