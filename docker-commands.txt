@@ -3,6 +3,57 @@ sudo usermod -aG docker <username> #avoid sudo every time
 #docker architecture: what runs and how to check
 
 
+#Login to docker repo
+docker login <repo-name>
+
+#how to build and tag
+docker build -t A/B:tag . #"." at the end means pick Dockerfile from current directory
+for example: sudo docker build -t pinaki/mytest:0.0.1 .
+output of the command as 
+pinaki@pinaki-ks-linux:~/project/personal/docker-test/third-docker-file-webserver$ docker images
+REPOSITORY                                                                                 TAG                               IMAGE ID            CREATED             SIZE
+pinaki/mytest                                                                              0.0.1                             2c2f2be77bb6        26 seconds ago      135MB
+
+#can tag one image to another
+docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+for example 
+pinaki@pinaki-ks-linux:~/project/personal/docker-test/third-docker-file-webserver$ sudo docker tag pinaki/mytest:0.0.1 pinaki/mytest:latest
+pinaki@pinaki-ks-linux:~/project/personal/docker-test/third-docker-file-webserver$ docker images
+REPOSITORY                                                                                 TAG                               IMAGE ID            CREATED             SIZE
+pinaki/mytest                                                                              0.0.1                             2c2f2be77bb6        2 minutes ago       135MB
+pinaki/mytest                                                                              latest                            2c2f2be77bb6        2 minutes ago       135MB
+
+#how to publish new build
+sudo docker build -t pinaki/mytest:0.0.2 .
+pinaki@pinaki-ks-linux:~/project/personal/docker-test/third-docker-file-webserver$ docker images
+REPOSITORY                                                                                 TAG                               IMAGE ID            CREATED             SIZE
+pinaki/mytest                                                                              0.0.2                             3784d0b023f0        8 seconds ago       135MB
+pinaki/mytest                                                                              0.0.1                             2c2f2be77bb6        4 minutes ago       135MB
+pinaki/mytest                                                                              latest                            2c2f2be77bb6        4 minutes ago       135MB
+
+pinaki@pinaki-ks-linux:~/project/personal/docker-test/third-docker-file-webserver$ sudo docker tag pinaki/mytest:0.0.2 pinaki/mytest:latest
+pinaki@pinaki-ks-linux:~/project/personal/docker-test/third-docker-file-webserver$ sudo docker images
+REPOSITORY                                                                                 TAG                               IMAGE ID            CREATED             SIZE
+pinaki/mytest                                                                              0.0.2                             3784d0b023f0        6 minutes ago       135MB
+pinaki/mytest                                                                              latest                            3784d0b023f0        6 minutes ago       135MB
+pinaki/mytest                                                                              0.0.1                             2c2f2be77bb6        10 minutes ago      135MB
+-->notice the Image ID changed for latest from 0.0.1 -->0.0.2
+
+#How to push to Repository/Artifactory
+
+docker login docker-virtual-rhone.artifactorylbj.it.keysight.com
+provide your user name and password
+
+Tag your Build
+docker tag <IMAGE_ID> artprod.mycompany/<DOCKER_REPOSITORY>:<DOCKER_TAG>
+for example docker tag 2c2f2be77bb6 myrepo.com/pinaki/test:0.0.2
+
+next push
+docker push artprod.mycompany/<DOCKER_REPOSITORY>:<DOCKER_TAG>
+for example docker push 2c2f2be77bb6 myrepo.com/pinaki/test:0.0.2
+
+
+
 docker pull ubuntu
 docker run ubuntu
 docker stop ubuntu
