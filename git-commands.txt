@@ -21,6 +21,12 @@ git merge master
 git checkout aq
 git rebase master
 
+#Pick only a few commits
+git checkout aq
+git cherry-pick commit1
+git cherry-pick commit2
+git cherry-pick commit3
+...
 TBD:
 1. How to do a diff between brnaches
 2. How to create a brnahc form a specific change
