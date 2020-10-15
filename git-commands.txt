@@ -4,10 +4,22 @@ git commit -m "<message>": submit a file
 
 #create a branch
 git branch <new-branch-name> 
-#delete a branch
-git branch -d <branch-name>
+
 #move to a branch
 git checkout <branchname>
+
+// delete branch locally
+git branch -d localBranchName
+// delete branch remotely
+git push origin --delete remoteBranchName
+
+#Merge a change from master to branch aq, the changes are in remore repo master
+git checkout aq
+git merge master
+
+#merge local changes: rebase
+git checkout aq
+git rebase master
 
 TBD:
 1. How to do a diff between brnaches
